@@ -5,7 +5,7 @@
 cd docker/
 # Build:
 docker build --build-arg USER_ID=$UID -t detectron2:v0 .
-# Launch:
+# Launch (require GPUs):
 docker run --gpus all -it \
   --shm-size=8gb --env="DISPLAY" --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
   --name=detectron2 detectron2:v0
@@ -14,9 +14,9 @@ docker run --gpus all -it \
 xhost +local:`docker inspect --format='{{ .Config.Hostname }}' detectron2`
 ```
 
-## Use the container (with docker < 19.03)
+## Use the container (with docker-compose ≥ 1.28.0)
 
-Install docker-compose and nvidia-docker2, then run:
+Install docker-compose and nvidia-docker-toolkit, then run:
 ```
 cd docker && USER_ID=$UID docker-compose run detectron2
 ```
